@@ -36,3 +36,19 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+## DEVELOPMENT
+
+Framework: Sveltekit
+Compiler: Svelte
+UI-components library: Flowbite + TailwindCSS
+
+Be conscious that tailwind is used not only by Flowbite but is giving a lot of css classes which can be used in project globally, so before you create
+new ones, make sure that they have been not already declared in tailwind. It can be frustrating to have a class which are not working because tailwind
+overwrite them.
+
+> Media queries:
+> MOBILE: < 1024px - fontsize: 16px
+> DESKTOP: > 1360 - 1660 - fontsize: ??
+
+> Class naming convention: BEM
