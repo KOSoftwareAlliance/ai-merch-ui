@@ -6,8 +6,8 @@
 
   let openDialog: boolean = false;
   let imageUrl: string;
-  page.subscribe(({url}) => {
-    imageUrl = url.search.split('?')[1];
+  page.subscribe(({url, params,data, route}) => {
+    imageUrl = url.search.split('?getUrl=')[1];
   })
 </script>
 
@@ -32,7 +32,7 @@
     <div>Instagram</div>
   </div>
 </div>
-<Modal title="Choose your product" bind:open={openDialog} class="m-0 w-full" >
+<Modal title="Zamów i zapłać" bind:open={openDialog} class="m-0 w-full" >
   <div class="h-[300px] flex items-center justify-center">
     <!-- <SC.Canvas >
       <SC.Mesh geometry={new THREE.BoxGeometry()} />
@@ -40,7 +40,7 @@
     </SC.Canvas> -->
     Product visualization
   </div>
-  <form>
+  <form method="POST" id="orderForm" action="/manage-image">
     <div class="mb-4">
       <Label>Imie</Label>
       <Input />
@@ -67,7 +67,7 @@
     </div>
   </form>
   <svelte:fragment slot='footer'>
-    <Button on:click={() => alert('Handle "success"')}>Zamów i zapłać</Button>
+    <Button type="submit" form="orderForm">Zamów i zapłać</Button>
   </svelte:fragment>
 </Modal>
 

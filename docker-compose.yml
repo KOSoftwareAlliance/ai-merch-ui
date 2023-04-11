@@ -1,0 +1,18 @@
+services:
+  flyway:
+    image: flyway/flyway
+    command: -configFiles=/flyway/conf/flyway.config -locations=filesystem:/flyway/sql -connectRetries=60 migrate
+    volumes:
+      - ./sql_versions:/flyway/sql
+      - ./flyway.config:/flyway/conf/flyway.config
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+    - "5432:5432"
+    environment:
+    - POSTGRES_USER=ai-merch
+    - POSTGRES_PASSWORD=ai-merch
+    - POSTGRES_DB=ai-merch-db

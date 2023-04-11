@@ -17,5 +17,6 @@
 		}
 		padding: 2rem 3rem;
 		height: 100%;
+		overflow-y: scroll;
 	}
 </style>
