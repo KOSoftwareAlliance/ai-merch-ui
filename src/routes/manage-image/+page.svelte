@@ -1,31 +1,40 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import { Button, Modal, Input, Label } from "flowbite-svelte";
+	import { Button, Modal, Input, Label, ButtonGroup, Carousel } from "flowbite-svelte";
 	import * as THREE from 'three';
 	import * as SC from 'svelte-cubed';
+	import { enhance, type SubmitFunction } from "$app/forms";
+
+  interface Product {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    category_id: number;
+  }
+
+  interface PageData {
+    products: Product[]
+  }
 
   let openDialog: boolean = false;
   let imageUrl: string;
-  page.subscribe(({url, params,data, route}) => {
+  let isLoading: boolean;
+
+  page.subscribe(({ url }) => {
     imageUrl = url.search.split('?getUrl=')[1];
   })
+
+  /** @type {import('./$types').PageData} */  
+  export let data: PageData;
+
+  const { products } = data;
 </script>
 
-<div class="flex flex-col">
-  <div class="grid grid-cols-4 w-100 gap-3 mb-24">
-    <img src={imageUrl} alt="Uploaded" class="col-span-3 rounded-lg" />
-    <div class="flex flex-col justify-around h-100">
-      <div on:mouseup={() => openDialog = true} class="border rounded-sm p-1 h-full text-center">
-        pr1
-      </div>
-      <div class="border rounded-sm p-1 h-full text-center">
-        pr2
-      </div>
-      <div class="border rounded-sm p-1 h-full text-center">
-        pr3
-      </div>
-    </div>
-  </div>
+<div class="flex flex-col items-center">
+  <img src={imageUrl} alt="Uploaded" class="col-span-3 rounded-lg mb-3" />
+    
+  <Carousel images={products} />
   <div class="flex flex-row justify-between">
     <div>Twitter</div>
     <div>Facebook</div>

@@ -12,7 +12,7 @@ export async function load() {
 }
 /** @type {import('./$types').Actions} */
 export const actions = {
-	upload: async ({request}) => {
+	upload: async ({ request }) => {
     const formData = await request.formData();
     const url = formData.get('storageUrl') as string;
     const image = formData.get('image') as File;
