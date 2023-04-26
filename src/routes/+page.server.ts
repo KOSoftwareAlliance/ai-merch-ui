@@ -24,15 +24,34 @@ export const actions = {
     const generateFormData = new FormData();
     generateFormData.append('image', getUrl);
     generateFormData.append('prompt', prompt);
-    return await fetch(`${AI_API}/generate`, { method: "POST", body: generateFormData }).then((res) => {
-      // if(res.status === 200){
-      //   return {
-      //     getUrl,
-      //   }
-      // } else {
-      //   return fail(400, { message: "We normalnie to zrób" })
-      // }
-      return { getUrl }
+    return await fetch(`${AI_API}/generate`, { method: "POST", body: generateFormData }).then(async res => {
+      const reader = await res.body?.getReader();
+      const stream = await new ReadableStream({
+        start(controller) {
+          return pump();
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          function pump() {
+            return reader?.read().then(({ done, value }) => {
+              if (done) {
+                controller.close();
+                return;
+              }
+              controller.enqueue(value);
+              return pump();
+            });
+          }
+        },
+      });
+      const response = await new Response(stream)
+      const image = await response.blob();
+      if(image){
+        return {
+          image,
+        }
+      } else {
+        return fail(400, { message: "We normalnie to zrób" })
+      }
     }).catch(() => {
       return fail(500, { message: "Coś poszło nie tak" })
     })

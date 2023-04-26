@@ -29,7 +29,7 @@
         error = result?.data.message;
       }
       // @ts-ignore
-      imageUrl = result.data?.getUrl as string;
+      imageUrl = URL.createObjectURL(result.data?.image);
       isLoading = false;
     }
   }
