@@ -15,9 +15,8 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
+		vite: { base: '/' }
 	},
-
-	vite: { base: '/' }
 };
 
 export default config;
