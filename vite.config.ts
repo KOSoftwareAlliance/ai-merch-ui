@@ -5,8 +5,8 @@ import type { UserConfig } from 'vite';
 const config: UserConfig = {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	// plugins: [sveltekit(), ssr({ target: 'node' })],
-	plugins: [sveltekit()],
+	plugins: [sveltekit(), ssr({ target: 'node' })],
+	// plugins: [sveltekit()],
 	optimizeDeps: {
 		exclude: ['aws-sdk']
 	},
