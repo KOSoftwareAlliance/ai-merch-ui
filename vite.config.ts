@@ -8,7 +8,8 @@ const config: UserConfig = {
 	plugins: [sveltekit(), ssr({ target: 'node' })],
 	optimizeDeps: {
 		exclude: ['aws-sdk']
-	}
+	},
+	base: '/'
 };
 
 export default config;
