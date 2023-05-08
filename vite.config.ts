@@ -9,7 +9,6 @@ const config: UserConfig = {
 	optimizeDeps: {
 		exclude: ['aws-sdk']
 	},
-	base: '/'
 };
 
 export default config;
