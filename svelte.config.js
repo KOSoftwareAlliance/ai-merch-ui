@@ -15,7 +15,6 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-		basePath: '/app',
 	}
 };
 
