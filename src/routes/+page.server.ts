@@ -24,7 +24,8 @@ export const actions = {
     const generateFormData = new FormData();
     generateFormData.append('image', getUrl);
     generateFormData.append('prompt', prompt);
-    return await fetch(`${AI_API}/generate`, { method: "POST", body: generateFormData }).then(async res => {
+    const response = fetch(`${AI_API}/generate`, { method: "POST", body: generateFormData }).then(async res => {
+      console.log(res)
       const reader = await res.body?.getReader();
       const stream = await new ReadableStream({
         start(controller) {
@@ -52,8 +53,11 @@ export const actions = {
       } else {
         return fail(400, { message: "We normalnie to zrób" })
       }
-    }).catch(() => {
+    }).catch((err) => {
+      console.log(err)
       return fail(500, { message: "Coś poszło nie tak" })
-    })
+    });
+    console.log(response);
+    return response;
   },
 };
