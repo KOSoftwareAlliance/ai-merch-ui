@@ -7,9 +7,9 @@ const config: UserConfig = {
 	// @ts-ignore
 	// plugins: [sveltekit(), ssr({ target: 'node' })],
 	plugins: [sveltekit()],
-	// optimizeDeps: {
-	// 	exclude: ['aws-sdk']
-	// },
+	optimizeDeps: {
+		exclude: ['aws-sdk']
+	},
 };
 
 export default config;
