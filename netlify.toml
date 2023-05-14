@@ -1,3 +1,7 @@
 [build]
-    command = "npm run build"
+    command = "npm run build && npm run export"
     publish = "build"
+    functions = "functions"
+[functions]
+  name = "sveltekit-render"
+  include_files = "node_modules/aws-sdk"
